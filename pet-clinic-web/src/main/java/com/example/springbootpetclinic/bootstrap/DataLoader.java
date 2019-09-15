@@ -64,6 +64,7 @@ public class DataLoader implements CommandLineRunner {
         mikesPet.setOwner(mike);
         mikesPet.setBirthDate(LocalDate.now());
         mikesPet.setName("Rosco");
+        mike.getPets().add(mikesPet);
 
         ownerService.save(mike);
 
@@ -85,11 +86,17 @@ public class DataLoader implements CommandLineRunner {
 
         System.out.println("Loaded Owners....");
 
+        Visit mikesPetVisit = new Visit();
+        mikesPetVisit.setPet(mikesPet);
+        mikesPetVisit.setDate(LocalDate.now());
+        mikesPetVisit.setDescription("Regular Check");
+
         Visit fionasCatVisit = new Visit();
         fionasCatVisit.setPet(fionasCat);
         fionasCatVisit.setDate(LocalDate.now());
         fionasCatVisit.setDescription("Sneezy Kitty");
 
+        visitService.save(mikesPetVisit);
         visitService.save(fionasCatVisit);
 
         System.out.println("Loaded Visits....");
