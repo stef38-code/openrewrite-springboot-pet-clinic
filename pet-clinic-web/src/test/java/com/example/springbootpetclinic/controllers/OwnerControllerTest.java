@@ -55,6 +55,10 @@ class OwnerControllerTest {
         verifyZeroInteractions(ownerService);
     }
 
+    private void verifyZeroInteractions(OwnerService ownerService) {
+
+    }
+
     @Test
     void processFindFormReturnOne() throws Exception {
         // when

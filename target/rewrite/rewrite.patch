@@ -1,0 +1,118 @@
+diff --git a/pet-clinic-data/pom.xml b/pet-clinic-data/pom.xml
+index 8fcf144..f3a19e5 100644
+--- a/pet-clinic-data/pom.xml
++++ b/pet-clinic-data/pom.xml
+@@ -71,7 +71,7 @@ org.openrewrite.config.CompositeRecipe
+         <dependency>
+             <groupId>org.mockito</groupId>
+             <artifactId>mockito-junit-jupiter</artifactId>
+-            <version>2.22.0</version>
++            <version>4.11.0</version>
+             <scope>test</scope>
+         </dependency>
+ 
+
+diff --git a/pet-clinic-web/pom.xml b/pet-clinic-web/pom.xml
+index ba5bf03..d694a5e 100644
+--- a/pet-clinic-web/pom.xml
++++ b/pet-clinic-web/pom.xml
+@@ -20,29 +20,34 @@ org.openrewrite.config.CompositeRecipe
+     </properties>
+ 
+ 
+-    <dependencies>
+-        <dependency>
+-            <artifactId>pet-clinic-data</artifactId>
+-            <groupId>com.example</groupId>
+-            <version>0.0.3-SNAPSHOT</version>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-starter-actuator</artifactId>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-starter-web</artifactId>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-devtools</artifactId>
+-            <scope>runtime</scope>
+-        </dependency>
++  <dependencies>
++    <dependency>
++      <artifactId>pet-clinic-data</artifactId>
++      <groupId>com.example</groupId>
++      <version>0.0.3-SNAPSHOT</version>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-starter-actuator</artifactId>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-starter-thymeleaf</artifactId>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-starter-web</artifactId>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-devtools</artifactId>
++      <scope>runtime</scope>
++    </dependency>
++    <dependency>
++      <groupId>org.junit.jupiter</groupId>
++      <artifactId>junit-jupiter</artifactId>
++      <scope>test</scope>
++    </dependency>
+ 
+ 
+         <!-- webjars -->
+@@ -94,7 +99,7 @@
+         <dependency>
+             <groupId>org.mockito</groupId>
+             <artifactId>mockito-junit-jupiter</artifactId>
+-            <version>2.22.0</version>
++            <version>4.11.0</version>
+             <scope>test</scope>
+         </dependency>
+ 
+
+diff --git a/pet-clinic-web/src/test/java/com/example/springbootpetclinic/SpringbootPetClinicApplicationTests.java b/pet-clinic-web/src/test/java/com/example/springbootpetclinic/SpringbootPetClinicApplicationTests.java
+index 90439d5..01cef40 100644
+--- a/pet-clinic-web/src/test/java/com/example/springbootpetclinic/SpringbootPetClinicApplicationTests.java
++++ b/pet-clinic-web/src/test/java/com/example/springbootpetclinic/SpringbootPetClinicApplicationTests.java
+@@ -9,10 +9,10 @@ org.openrewrite.config.CompositeRecipe
+ // have to specify the test class
+ // @SpringBootTest(classes=SpringbootPetClinicApplication.class)
+ @SpringBootTest
+-public class SpringbootPetClinicApplicationTests {
++class SpringbootPetClinicApplicationTests {
+ 
+     @Test
+-    public void contextLoads() {
++    void contextLoads() {
+     }
+ 
+ }
+
+diff --git a/pet-clinic-web/src/test/java/com/example/springbootpetclinic/controllers/OwnerControllerTest.java b/pet-clinic-web/src/test/java/com/example/springbootpetclinic/controllers/OwnerControllerTest.java
+index 3292831..0a5c594 100644
+--- a/pet-clinic-web/src/test/java/com/example/springbootpetclinic/controllers/OwnerControllerTest.java
++++ b/pet-clinic-web/src/test/java/com/example/springbootpetclinic/controllers/OwnerControllerTest.java
+@@ -84,7 +84,7 @@ org.openrewrite.config.CompositeRecipe
+     }
+ 
+     @Test
+-    void testShowOwner() throws Exception {
++    void showOwner() throws Exception {
+         // when
+         when(ownerService.findById(anyLong())).thenReturn(Owner.builder().id(1l).build());
+         // then
+
