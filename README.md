@@ -1,5 +1,4 @@
-[![CircleCI](https://circleci.com/gh/rjdarksky1/springboot-pet-clinic.svg?style=svg)](https://circleci.com/gh/rjdarksky1/springboot-pet-clinic)
-
+Ref clone: https://github.com/rjdarksky1/springboot-pet-clinic/tree/master
 # springboot-pet-clinic
 
 Springboot Pet Clinic Project Follow Along Course
