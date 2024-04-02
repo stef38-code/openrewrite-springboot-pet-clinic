@@ -1,8 +1,17 @@
 diff --git a/pom.xml b/pom.xml
-index 31b174a..1702c08 100644
+index dad445c..51628f8 100644
 --- a/pom.xml
 +++ b/pom.xml
-@@ -23,7 +23,7 @@ org.openrewrite.config.CompositeRecipe
+@@ -11,7 +11,7 @@ org.openrewrite.config.CompositeRecipe
+     <parent>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-parent</artifactId>
+-        <version>2.7.16</version>
++        <version>3.2.4</version>
+         <relativePath /> <!-- lookup parent from repository -->
+     </parent>
+ 
+@@ -23,7 +23,7 @@
      <description>Demo project for Spring Boot</description>
  
      <properties>
@@ -36,67 +45,361 @@ index 31b174a..1702c08 100644
      </dependencies>
  
 
+diff --git a/pet-clinic-data/pom.xml b/pet-clinic-data/pom.xml
+index 8fcf144..d5c1278 100644
+--- a/pet-clinic-data/pom.xml
++++ b/pet-clinic-data/pom.xml
+@@ -25,17 +25,11 @@ org.openrewrite.config.CompositeRecipe
+             <scope>runtime</scope>
+         </dependency>
+         <dependency>
+-            <groupId>mysql</groupId>
+-            <artifactId>mysql-connector-java</artifactId>
+-            <version>8.0.16</version>
++            <groupId>com.mysql</groupId>
++            <artifactId>mysql-connector-j</artifactId>
+             <scope>runtime</scope>
+         </dependency>
+         <!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+-        <dependency>
+-            <groupId>javax.validation</groupId>
+-            <artifactId>validation-api</artifactId>
+-            <version>2.0.0.Final</version>
+-        </dependency>
+ 
+         <dependency>
+             <groupId>org.projectlombok</groupId>
+@@ -47,12 +41,6 @@
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-test</artifactId>
+             <scope>test</scope>
+-            <exclusions>
+-                <exclusion>
+-                    <groupId>junit</groupId>
+-                    <artifactId>junit</artifactId>
+-                </exclusion>
+-            </exclusions>
+         </dependency>
+ 
+         <!--        for JUnit 5-->
+@@ -71,7 +59,7 @@
+         <dependency>
+             <groupId>org.mockito</groupId>
+             <artifactId>mockito-junit-jupiter</artifactId>
+-            <version>2.22.0</version>
++            <version>4.11.0</version>
+             <scope>test</scope>
+         </dependency>
+ 
+
+diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Owner.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Owner.java
+index 734a08f..d1b9590 100644
+--- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Owner.java
++++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Owner.java
+@@ -5,7 +5,7 @@ org.openrewrite.config.CompositeRecipe
+ import lombok.NoArgsConstructor;
+ import lombok.Setter;
+ 
+-import javax.persistence.*;
++import jakarta.persistence.*;
+ import java.util.HashSet;
+ import java.util.Set;
+ 
+
 diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/PetType.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/PetType.java
-index af7a55f..bcb049a 100644
+index af7a55f..080f9f1 100644
 --- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/PetType.java
 +++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/PetType.java
-@@ -1,7 +1,5 @@ org.openrewrite.config.CompositeRecipe
+@@ -1,10 +1,8 @@ org.openrewrite.config.CompositeRecipe
  package com.example.springbootpetclinic.model;
  
 -import lombok.*;
 -
- import javax.persistence.Column;
- import javax.persistence.Entity;
- import javax.persistence.Table;
+-import javax.persistence.Column;
+-import javax.persistence.Entity;
+-import javax.persistence.Table;
++import jakarta.persistence.Column;
++import jakarta.persistence.Entity;
++import jakarta.persistence.Table;
+ 
+ @Setter
+ @Getter
 
 diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Pet.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Pet.java
-index 0def6e8..e19669e 100644
+index 0def6e8..601369a 100644
 --- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Pet.java
 +++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Pet.java
-@@ -1,6 +1,5 @@ org.openrewrite.config.CompositeRecipe
+@@ -1,9 +1,8 @@ org.openrewrite.config.CompositeRecipe
  package com.example.springbootpetclinic.model;
  
 -import lombok.*;
  import org.springframework.format.annotation.DateTimeFormat;
  
- import javax.persistence.*;
-
-diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Vet.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Vet.java
-index 55ea22f..79eafd4 100644
---- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Vet.java
-+++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Vet.java
-@@ -1,7 +1,5 @@ org.openrewrite.config.CompositeRecipe
- package com.example.springbootpetclinic.model;
- 
--import lombok.*;
--
- import javax.persistence.*;
+-import javax.persistence.*;
++import jakarta.persistence.*;
+ import java.time.LocalDate;
  import java.util.HashSet;
  import java.util.Set;
 
-diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Visit.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Visit.java
-index 38c20ef..8b12a4e 100644
---- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Visit.java
-+++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Visit.java
-@@ -1,7 +1,5 @@ org.openrewrite.config.CompositeRecipe
+diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Vet.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Vet.java
+index 55ea22f..9b12423 100644
+--- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Vet.java
++++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Vet.java
+@@ -1,8 +1,6 @@ org.openrewrite.config.CompositeRecipe
  package com.example.springbootpetclinic.model;
  
 -import lombok.*;
 -
- import javax.persistence.*;
- import java.time.LocalDate;
+-import javax.persistence.*;
++import jakarta.persistence.*;
+ import java.util.HashSet;
+ import java.util.Set;
  
 
-diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Speciality.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Speciality.java
-index a598ef2..7daad4e 100644
---- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Speciality.java
-+++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Speciality.java
-@@ -1,7 +1,5 @@ org.openrewrite.config.CompositeRecipe
+diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Person.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Person.java
+index 3a333e5..ccf1df7 100644
+--- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Person.java
++++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Person.java
+@@ -5,8 +5,8 @@ org.openrewrite.config.CompositeRecipe
+ import lombok.NoArgsConstructor;
+ import lombok.Setter;
+ 
+-import javax.persistence.Column;
+-import javax.persistence.MappedSuperclass;
++import jakarta.persistence.Column;
++import jakarta.persistence.MappedSuperclass;
+ 
+ @Getter
+ @Setter
+
+diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/BaseEntity.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/BaseEntity.java
+index 57531b8..65a5ec7 100644
+--- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/BaseEntity.java
++++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/BaseEntity.java
+@@ -5,10 +5,10 @@ org.openrewrite.config.CompositeRecipe
+ import lombok.NoArgsConstructor;
+ import lombok.Setter;
+ 
+-import javax.persistence.GeneratedValue;
+-import javax.persistence.GenerationType;
+-import javax.persistence.Id;
+-import javax.persistence.MappedSuperclass;
++import jakarta.persistence.GeneratedValue;
++import jakarta.persistence.GenerationType;
++import jakarta.persistence.Id;
++import jakarta.persistence.MappedSuperclass;
+ import java.io.Serializable;
+ 
+ @Getter
+
+diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Visit.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Visit.java
+index 38c20ef..08cd2be 100644
+--- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Visit.java
++++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Visit.java
+@@ -1,8 +1,6 @@ org.openrewrite.config.CompositeRecipe
  package com.example.springbootpetclinic.model;
  
 -import lombok.*;
 -
- import javax.persistence.Column;
- import javax.persistence.Entity;
- import javax.persistence.Table;
+-import javax.persistence.*;
++import jakarta.persistence.*;
+ import java.time.LocalDate;
+ 
+ @Setter
+
+diff --git a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Speciality.java b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Speciality.java
+index a598ef2..b11ded9 100644
+--- a/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Speciality.java
++++ b/pet-clinic-data/src/main/java/com/example/springbootpetclinic/model/Speciality.java
+@@ -1,10 +1,8 @@ org.openrewrite.config.CompositeRecipe
+ package com.example.springbootpetclinic.model;
+ 
+-import lombok.*;
+-
+-import javax.persistence.Column;
+-import javax.persistence.Entity;
+-import javax.persistence.Table;
++import jakarta.persistence.Column;
++import jakarta.persistence.Entity;
++import jakarta.persistence.Table;
+ 
+ @Setter
+ @Getter
+
+diff --git a/pet-clinic-web/pom.xml b/pet-clinic-web/pom.xml
+index ba5bf03..f100b3c 100644
+--- a/pet-clinic-web/pom.xml
++++ b/pet-clinic-web/pom.xml
+@@ -20,29 +20,38 @@ org.openrewrite.config.CompositeRecipe
+     </properties>
+ 
+ 
+-    <dependencies>
+-        <dependency>
+-            <artifactId>pet-clinic-data</artifactId>
+-            <groupId>com.example</groupId>
+-            <version>0.0.3-SNAPSHOT</version>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-starter-actuator</artifactId>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-starter-web</artifactId>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.springframework.boot</groupId>
+-            <artifactId>spring-boot-devtools</artifactId>
+-            <scope>runtime</scope>
+-        </dependency>
++  <dependencies>
++    <dependency>
++      <artifactId>pet-clinic-data</artifactId>
++      <groupId>com.example</groupId>
++      <version>0.0.3-SNAPSHOT</version>
++    </dependency>
++    <dependency>
++      <groupId>jakarta.validation</groupId>
++      <artifactId>jakarta.validation-api</artifactId>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-starter-actuator</artifactId>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-starter-thymeleaf</artifactId>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-starter-web</artifactId>
++    </dependency>
++    <dependency>
++      <groupId>org.springframework.boot</groupId>
++      <artifactId>spring-boot-devtools</artifactId>
++      <scope>runtime</scope>
++    </dependency>
++    <dependency>
++      <groupId>org.junit.jupiter</groupId>
++      <artifactId>junit-jupiter</artifactId>
++      <scope>test</scope>
++    </dependency>
+ 
+ 
+         <!-- webjars -->
+@@ -71,12 +80,6 @@
+             <groupId>org.springframework.boot</groupId>
+             <artifactId>spring-boot-starter-test</artifactId>
+             <scope>test</scope>
+-            <exclusions>
+-                <exclusion>
+-                    <groupId>junit</groupId>
+-                    <artifactId>junit</artifactId>
+-                </exclusion>
+-            </exclusions>
+         </dependency>
+ 
+         <!--        for JUnit 5-->
+@@ -94,7 +97,7 @@
+         <dependency>
+             <groupId>org.mockito</groupId>
+             <artifactId>mockito-junit-jupiter</artifactId>
+-            <version>2.22.0</version>
++            <version>4.11.0</version>
+             <scope>test</scope>
+         </dependency>
+ 
+
+diff --git a/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/PetController.java b/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/PetController.java
+index 66f4469..4297a47 100644
+--- a/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/PetController.java
++++ b/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/PetController.java
+@@ -14,7 +14,7 @@ org.openrewrite.config.CompositeRecipe
+ import org.springframework.web.bind.WebDataBinder;
+ import org.springframework.web.bind.annotation.*;
+ 
+-import javax.validation.Valid;
++import jakarta.validation.Valid;
+ import java.util.Collection;
+ @Controller
+ @RequestMapping("/owners/{ownerId}")
+@@ -38,7 +38,7 @@
+     }
+ 
+     @ModelAttribute("owner")
+-    public Owner findOwner(@PathVariable("ownerId") Long ownerId) {
++    public Owner findOwner(@PathVariable Long ownerId) {
+         return ownerService.findById(ownerId);
+     }
+ 
+
+diff --git a/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/VisitController.java b/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/VisitController.java
+index af8544e..c35a404 100644
+--- a/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/VisitController.java
++++ b/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/VisitController.java
+@@ -9,7 +9,7 @@ org.openrewrite.config.CompositeRecipe
+ import org.springframework.web.bind.WebDataBinder;
+ import org.springframework.web.bind.annotation.*;
+ 
+-import javax.validation.Valid;
++import jakarta.validation.Valid;
+ import java.beans.PropertyEditorSupport;
+ import java.time.LocalDate;
+ import java.util.Map;
+@@ -47,7 +47,7 @@
+      * @return Pet
+      */
+     @ModelAttribute("visit")
+-    public Visit loadPetWithVisit(@PathVariable("petId") Long petId, Map<String, Object> model) {
++    public Visit loadPetWithVisit(@PathVariable Long petId, Map<String, Object> model) {
+         Pet pet = petService.findById(petId);
+         model.put("pet", pet);
+         Visit visit = new Visit();
+@@ -58,7 +58,7 @@
+ 
+     // Spring MVC calls method loadPetWithVisit(...) before initNewVisitForm is called
+     @GetMapping("/owners/*/pets/{petId}/visits/new")
+-    public String initNewVisitForm(@PathVariable("petId") Long petId, Map<String, Object> model) {
++    public String initNewVisitForm(@PathVariable Long petId, Map<String, Object> model) {
+         return "pets/createOrUpdateVisitForm";
+     }
+ 
+
+diff --git a/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/OwnerController.java b/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/OwnerController.java
+index 6cfb83b..7c5716b 100644
+--- a/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/OwnerController.java
++++ b/pet-clinic-web/src/main/java/com/example/springbootpetclinic/controllers/OwnerController.java
+@@ -9,7 +9,7 @@ org.openrewrite.config.CompositeRecipe
+ import org.springframework.web.bind.annotation.*;
+ import org.springframework.web.servlet.ModelAndView;
+ 
+-import javax.validation.Valid;
++import jakarta.validation.Valid;
+ import java.util.List;
+ 
+ @RequestMapping("/owners")
+
+diff --git a/pet-clinic-web/src/test/java/com/example/springbootpetclinic/SpringbootPetClinicApplicationTests.java b/pet-clinic-web/src/test/java/com/example/springbootpetclinic/SpringbootPetClinicApplicationTests.java
+index 90439d5..f50923b 100644
+--- a/pet-clinic-web/src/test/java/com/example/springbootpetclinic/SpringbootPetClinicApplicationTests.java
++++ b/pet-clinic-web/src/test/java/com/example/springbootpetclinic/SpringbootPetClinicApplicationTests.java
+@@ -1,13 +1,8 @@ org.openrewrite.config.CompositeRecipe
+ package com.example.springbootpetclinic;
+ 
+ import org.junit.jupiter.api.Test;
+-import org.junit.jupiter.api.extension.ExtendWith;
+ import org.springframework.boot.test.context.SpringBootTest;
+-import org.springframework.test.context.junit.jupiter.SpringExtension;
+ 
+-@ExtendWith(SpringExtension.class)
+-// have to specify the test class
+-// @SpringBootTest(classes=SpringbootPetClinicApplication.class)
+ @SpringBootTest
+ public class SpringbootPetClinicApplicationTests {
+ 
 
